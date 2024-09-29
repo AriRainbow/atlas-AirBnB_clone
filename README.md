@@ -1,2 +1,2 @@
 # atlas-AirBnB_clone
-atlas-AirBnB_clone partener project with Natalie Richie
+atlas-AirBnB_clone partner project with Natalie Richie
