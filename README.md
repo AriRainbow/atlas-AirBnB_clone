@@ -17,3 +17,4 @@ via a shell interface, performing operations such as:
 - Deleting objects
 
 ### How to Start the Command Interpreter
+To start the command interpreter in interactive mode:
