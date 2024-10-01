@@ -89,6 +89,8 @@ class TestBaseModel(unittest.TestCase):
             os.remove(self.test_file)  # Remove the test JSON file if it exists
         except FileNotFoundError:
             pass
+        except Exception as e:
+            print(f"Error removing file: {e}")
 
     def test_reload_same_as_create(self):
         """Test if reloaded objects are the same as created ones."""

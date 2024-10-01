@@ -19,7 +19,7 @@ class FileStorage:
     def new(self, obj):
         """Sets in __objects the obj with key <obj class name>.id."""
         key = f"{obj.__class__.__name__}.{obj.id}"  # Fixed key formatting
-        self.__objects[key] = obj
+        self.__objects[key] = obj  # Ensure the object is properly stored
 
     def save(self):
         """Serializes __objects to the JSON file."""
@@ -43,12 +43,21 @@ class FileStorage:
                     # Import classes here to avoid circular import
                     from models.base_model import BaseModel
                     from models.user import User
+                    from models.place import Place
+                    from models.state import State
+                    from models.city import City
+                    from models.review import Review
+                    from models.amenity import Amenity
                     
                     # Map class names to actual classes
                     classes = {
                         "BaseModel": BaseModel,
-                        "User": User
-                        # Add other class mappings as needed
+                        "User": User,
+                        "Place": Place,
+                        "State": State,
+                        "City": City,
+                        "Review": Review,
+                        "Amenity": Amenity
                     }
 
                     # Check if class_name exists in classes
