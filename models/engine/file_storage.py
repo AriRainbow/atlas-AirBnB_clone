@@ -76,6 +76,10 @@ class FileStorage:
                     cls = classes.get(class_name)  # Retrieve the class object from the classes dictionary
                     self.objects[key] = cls(**value)  # Instantiate the class using the saved dictionary
 
+    def get_objects(self):
+        """Returns the objects stored in __objects."""
+        return self.__objects  # Accessing __objects directly is fine here
+
     def count_objects(self):
         """Returns the number of objects stored."""
         return len(self.__objects)
