@@ -38,10 +38,9 @@ class FileStorage:
                 for key, value in loaded_data.items():
                     class_name = value.pop("__class__", None)  # Remove __class__ key
 
-                # Ensure the class name exists in the saved data
-                if not class_name:
-                    continue
-
+                    if not class_name:
+                        continue
+                    
                 # Import classes here to avoid circular import
                 from models.base_model import BaseModel
                 from models.user import User
