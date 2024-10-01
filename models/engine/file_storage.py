@@ -30,6 +30,8 @@ class FileStorage:
         with open(self.__file_path, 'w') as f:
             json.dump({key: obj.to_dict() for key, obj in self.__objects.items()}, f)
 
+        return True  # Ensures that it returns True after saving
+
     def reload(self):
         """Deserializes the JSON file to __objects."""
         if os.path.exists(self.__file_path):
