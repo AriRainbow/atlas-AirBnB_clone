@@ -1,13 +1,16 @@
 #!/usr/bin/python3
 import json
 import os
+from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
     """Class to serialize and deserialize instances to/from a JSON file."""
 
-    __file_path = "file.json"  # path to the JSON file
-    __objects = {}  # stores all objects
+    def __init__(self):
+        self.__file_path = "file.json"  # path to the JSON file
+        self.__objects = {}  # stores all objects
 
     def all(self):
         """Returns the dictionary __objects."""
@@ -31,4 +34,12 @@ class FileStorage:
                 for key, value in self.__objects.items():
                     # Create an instance of the class from the dictionary
                     class_name = value.pop("__class__")  # Remove __class__ key
-                    self.__objects[key] = eval(class_name)(**value)
+                    classes = {
+                        "BaseModel": BaseModel,
+                        "User": User
+                        # Add other class mappings as needed
+                    }
+                    if class_name in classes:
+                        self.__objects[key] = classes[class_name](**value)
+                    else:
+                        print(f"Warning: Class '{class_name}' not found.")
