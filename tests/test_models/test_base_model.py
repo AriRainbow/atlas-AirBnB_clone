@@ -57,5 +57,19 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(base.created_at, datetime)
         self.assertIsInstance(base.updated_at, datetime)
 
+    def test_base_model_created_from_dict(self):
+        """Test BaseModel creation from a dictionary."""
+        model_dict = {
+            'id': '12345',
+            'created_at': '2024-10-01T04:33:36.270837',
+            'updated_at': '2024-10-01T04:33:36.270843'
+        }
+        
+        model_instance = BaseModel(**model_dict)
+        
+        self.assertEqual(model_instance.id, '12345')
+        self.assertEqual(model_instance.created_at, datetime.strptime('2024-10-01T04:33:36.270837', "%Y-%m-%dT%H:%M:%S.%f"))
+        self.assertEqual(model_instance.updated_at, datetime.strptime('2024-10-01T04:33:36.270843', "%Y-%m-%dT%H:%M:%S.%f"))
+
 if __name__ == "__main__":
     unittest.main()
