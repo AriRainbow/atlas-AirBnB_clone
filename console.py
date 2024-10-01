@@ -29,7 +29,7 @@ class BaseModel:
 
     def save(self):
         self.updated_at = datetime.now()
-        storage.save(self)
+        storage.save()
 
     def to_dict(self):
         dictionary = self.__dict__.copy()
@@ -54,9 +54,9 @@ class FileStorage:
         self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
 
     def save(self):
-        with open(self.__file_path, 'w') as f:
+                with open(self.__file_path, 'w') as f:
             json.dump({k: v.to_dict() for k, v in self.__objects.items()}, f)
-
+    
     def reload(self):
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as f:
