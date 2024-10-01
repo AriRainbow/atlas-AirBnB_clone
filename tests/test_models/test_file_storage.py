@@ -46,5 +46,11 @@ class TestFileStorage(unittest.TestCase):
         """Test that the file_path is correctly initialized."""
         self.assertEqual(self.storage._FileStorage__file_path, "file.json")
 
+    def test_object_creation(self):
+        """Test object creation and count."""
+        obj1 = BaseModel()
+        self.storage.new(obj1)
+        self.assertEqual(self.storage.count_objects(), 1)  # Ensure one object is stored
+
 if __name__ == '__main__':
     unittest.main()
