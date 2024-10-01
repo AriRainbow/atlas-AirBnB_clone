@@ -69,20 +69,16 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     def do_quit(self, arg):
-        """Quit command to exit the program"""
         return True
 
     def do_EOF(self, arg):
-        """EOF command to exit the program"""
         print()
         return True
 
     def emptyline(self):
-        """Do nothing on empty input line"""
         pass
 
     def do_create(self, arg):
-        """Creates a new instance of BaseModel"""
         if not arg:
             print("** class name missing **")
         elif arg != "BaseModel":
@@ -94,7 +90,6 @@ class HBNBCommand(cmd.Cmd):
             print(new_instance.id)
 
     def do_show(self, arg):
-        """Prints the string representation of an instance based on the class name and id"""
         args = arg.split()
         if not args:
             print("** class name missing **")
@@ -110,7 +105,6 @@ class HBNBCommand(cmd.Cmd):
                 print(storage.all()[key])
 
     def do_destroy(self, arg):
-        """Deletes an instance based on the class name and id"""
         args = arg.split()
         if not args:
             print("** class name missing **")
@@ -127,7 +121,6 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def do_all(self, arg):
-        """Prints all string representation of all instances based or not on the class name"""
         if arg and arg != "BaseModel":
             print("** class doesn't exist **")
         else:
@@ -135,7 +128,6 @@ class HBNBCommand(cmd.Cmd):
             print(obj_list)
 
     def do_update(self, arg):
-        """Updates an instance based on the class name and id by adding or updating attribute"""
         args = arg.split()
         if not args:
             print("** class name missing **")
