@@ -12,12 +12,12 @@ class TestBaseModel(unittest.TestCase):
         model = BaseModel()
         self.assertIsInstance(model, BaseModel)
         self.assertIsInstance(model.id, str)
-        self.assertIsInstance(model.create_at, datetime)
+        self.assertIsInstance(model.created_at, datetime)
         self.assertIsInstance(model.updated_at, datetime)
 
     def test_save_method(self):
         """Test if save method updates updated_at."""
-        model = BaseModel
+        model = BaseModel()  # Create an instance 
         old_updated_at = model.updated_at
         model.save()
         self.assertNotEqual(old_updated_at, model.updated_at)
@@ -32,12 +32,12 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(model_dict['updated_at'], str)
 
     def test_init_with_kwargs(self):
-        """Test creating ann instance from a dictionary (kwargs)."""
+        """Test creating an instance from a dictionary (kwargs)."""
         # Create an initial instance
         base = BaseModel()
         base.name = "My First Model"
         base.my_number = 89
-        base_dict = base.to_dict()
+        base_dict = base.to_dict()  # Convert to dictionary
 
         # Create a new instance using dictionary (kwargs)
         new_base = BaseModel(**base_dict)
@@ -47,6 +47,10 @@ class TestBaseModel(unittest.TestCase):
 
         # Check if the create_at and updated_at are converted back to datetime
         self.assertEqual(base.created_at, new_base.created_at)
+        self.assertEqual(base.updated_at, new_base.updated_at)
+
+        # Check if the other attributes are preserved
+        self.assertEqual(base.name, new_base.name)
         self.assertEqual(base.my_number, new_base.my_number)
 
     def test_init_no_kwargs(self):
