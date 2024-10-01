@@ -31,7 +31,7 @@ class BaseModel:
         storage.save()  # Save the storage to file
 
     def to_dict(self):
-        """Return a dictionary representaion of the instance,"""
+        """Return a dictionary representation of the instance."""
         dict_rep = self.__dict__.copy()  # Copy current attributes
         dict_rep['__class__'] = self.__class__.__name__  # Add class name to the dictionary
         dict_rep['created_at'] = self.created_at.isoformat()  # Convert created_at to ISO string
