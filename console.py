@@ -1,21 +1,16 @@
 #!/usr/bin/python3
 
 
+'''Module'''
+
 import cmd
 import json
 import os
 import uuid
 from datetime import datetime
 
-
-"""Module"""
-
-
 class BaseModel:
-
-
-    """Class"""
-
+    '''Class'''
 
     def __init__(self, *args, **kwargs):
         if kwargs:
@@ -42,7 +37,7 @@ class BaseModel:
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
 class FileStorage:
-    """Class"""
+    '''Class'''
 
     __file_path = "file.json"
     __objects = {}
@@ -54,9 +49,9 @@ class FileStorage:
         self.__objects[f"{obj.__class__.__name__}.{obj.id}"] = obj
 
     def save(self):
-                with open(self.__file_path, 'w') as f:
+        with open(self.__file_path, 'w') as f:
             json.dump({k: v.to_dict() for k, v in self.__objects.items()}, f)
-    
+
     def reload(self):
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as f:
@@ -68,7 +63,7 @@ storage = FileStorage()
 storage.reload()
 
 class HBNBCommand(cmd.Cmd):
-    """Class"""
+    '''Class'''
 
 
     prompt = '(hbnb) '
