@@ -33,14 +33,11 @@ class FileStorage:
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as f:
                 loaded_data = json.load(f)  # Load JSON data
-                print("Loaded data from JSON:")
-                print(loaded_data)
                 for key, value in loaded_data.items():
                     class_name = value.pop("__class__", None)  # Remove __class__ key
 
                     # Ensure the class name exists in the saved data
                     if not class_name:
-                        print(f"Warning: No class name found for object {key}")
                         continue
 
                     # Import classes here to avoid circular import
@@ -56,8 +53,5 @@ class FileStorage:
 
                     # Check if class_name exists in classes
                     if class_name in classes:
-                        print(f"Restoring objects {key} of class {class_name}")
                         # Dynamically create an instance from the class using the dictionary value
                         self.__objects[key] = classes[class_name](**value)
-                    else:
-                        print(f"Warning: Class '{class_name}' not found.")
