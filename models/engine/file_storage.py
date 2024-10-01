@@ -30,20 +30,30 @@ class FileStorage:
         """Deserializes the JSON file to __objects."""
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as f:
-                self.__objects = json.load(f)
-                for key, value in self.__objects.items():
-                    # Create an instance of the class from the dictionary
+                loaded_data = json.load(f)  # Load JSON data
+                for key, value in loaded_data.items():
+                    # Extract class name
                     class_name = value.pop("__class__")  # Remove __class__ key
+
+                    # Ensure the class name exists in the saved data
+                    if not class_name:
+                        print(f"Warning: No class name found for object {key}")
+                        continue
+
                     # Import classes here to avoid circular import
                     from models.base_model import BaseModel
                     from models.user import User
                     
+                    # Map class names to actual classes
                     classes = {
                         "BaseModel": BaseModel,
                         "User": User
                         # Add other class mappings as needed
                     }
+
+                    # Check if class_name exists in classes
                     if class_name in classes:
+                        # Dynamically create an instance from the class using the dictionary value
                         self.__objects[key] = classes[class_name](**value)
                     else:
                         print(f"Warning: Class '{class_name}' not found.")
