@@ -61,10 +61,10 @@ class FileStorage:
                     "Amenity": Amenity
                 }
 
-                # Check if class_name exists in classes
+                # Ensure class name is retrieved correctly from the dictionary
                 if class_name in classes:
-                    # Dynamically create an instance from the class using the dictionary value
-                    self.__objects[key] = classes.class_name
+                    cls = classes.get(class_name)  # Retrieve the class object from the classes dictionary
+                    self.objects[key] = cls(**value)  # Instantiate the class using the saved dictionary
 
     def count_objects(self):
         """Returns the number of objects stored."""
