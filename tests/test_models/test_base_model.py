@@ -75,5 +75,29 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(model_instance.created_at, datetime.strptime('2024-10-01T04:33:36.270837', "%Y-%m-%dT%H:%M:%S.%f"))
         self.assertEqual(model_instance.updated_at, datetime.strptime('2024-10-01T04:33:36.270843', "%Y-%m-%dT%H:%M:%S.%f"))
 
+    def test_reload_same_as_create(self):
+        """Test if reloaded objects are the same as created ones."""
+        from models.engine.file_storage import FileStorage
+        
+        storage = FileStorage()  # Create a new storage instance
+        obj1 = BaseModel()  # Create a new BaseModel object
+
+        storage.new(obj1)  # Add the object to storage
+        storage.save()     # Save the storage to file
+
+        # Now reload the storage to verify the object is still there
+        storage.reload()  # Reload the data from the file
+
+        obj1_key = f"BaseModel.{obj1.id}"  # Construct the key for the stored object
+
+        # Assert that the reloaded object exists in the storage
+        self.assertIn(obj1_key, storage.all())
+
+        # Retrieve the object from storage
+        obj_reloaded = storage.all()[obj1_key]
+
+        # Compare the attributes of the original and reloaded object
+        self.assertEqual(obj1.to_dict(), obj_reloaded.to_dict())  # Ensure they are the same
+
 if __name__ == "__main__":
     unittest.main()
