@@ -66,3 +66,7 @@ class FileStorage:
                     if class_name in classes:
                         # Dynamically create an instance from the class using the dictionary value
                         self.__objects[key] = classes[class_name](**value)
+
+    def count_objects(self):
+        """Returns the number of objects stored."""
+        return len(self.__objects)
