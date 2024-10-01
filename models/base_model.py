@@ -11,8 +11,8 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 if key in ['created_at', 'updated_at']:
-                    # Correct format: use 'T%H:%M:%S' instead of '%T%H:%S'
-                    setattr(self, key, datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+                    # Convert the ISO format string back to datetime objects
+                    setattr(self, key, datetime.fromisoformat(value))
                 elif key != '__class__':
                     setattr(self, key, value)
         else:
