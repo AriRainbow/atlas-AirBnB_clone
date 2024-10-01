@@ -29,43 +29,44 @@ class FileStorage:
             # Serialize the data to JSON and write it to the file
             json.dump(data, f)
         return True  # Ensures that it returns True after saving
-
+    
     def reload(self):
-        """Deserializes the JSON file to __objects."""
-        if os.path.exists(self.__file_path):
-            with open(self.__file_path, 'r') as f:
-                loaded_data = json.load(f)  # Load JSON data
-                for key, value in loaded_data.items():
-                    class_name = value.pop("__class__", None)  # Remove __class__ key
+    """Deserializes the JSON file to __objects."""
+    if os.path.exists(self.__file_path):
+        with open(self.__file_path, 'r') as f:
+            loaded_data = json.load(f)  # Load JSON data
+            for key, value in loaded_data.items():
+                class_name = value.pop("__class__", None)  # Remove __class__ key
 
-                    # Ensure the class name exists in the saved data
-                    if not class_name:
-                        continue
+                # Ensure the class name exists in the saved data
+                if not class_name:
+                    continue
 
-                    # Import classes here to avoid circular import
-                    from models.base_model import BaseModel
-                    from models.user import User
-                    from models.place import Place
-                    from models.state import State
-                    from models.city import City
-                    from models.review import Review
-                    from models.amenity import Amenity
-                    
-                    # Map class names to actual classes
-                    classes = {
-                        "BaseModel": BaseModel,
-                        "User": User,
-                        "Place": Place,
-                        "State": State,
-                        "City": City,
-                        "Review": Review,
-                        "Amenity": Amenity
-                    }
+                # Import classes here to avoid circular import
+                from models.base_model import BaseModel
+                from models.user import User
+                from models.place import Place
+                from models.state import State
+                from models.city import City
+                from models.review import Review
+                from models.amenity import Amenity
+                
+                # Map class names to actual classes
+                classes = {
+                    "BaseModel": BaseModel,
+                    "User": User,
+                    "Place": Place,
+                    "State": State,
+                    "City": City,
+                    "Review": Review,
+                    "Amenity": Amenity
+                }
 
-                    # Check if class_name exists in classes
-                    if class_name in classes:
-                        # Dynamically create an instance from the class using the dictionary value
-                        self.__objects[key] = classesclass_name
+                # Check if class_name exists in classes
+                if class_name in classes:
+                    # Dynamically create an instance from the class using the dictionary value
+                    self.__objects[key] = classesclass_name
+
 
     def count_objects(self):
         """Returns the number of objects stored."""
