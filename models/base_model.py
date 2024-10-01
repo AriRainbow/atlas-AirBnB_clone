@@ -27,7 +27,6 @@ class BaseModel:
         """Update the updated_at attributes to the current time."""
         self.updated_at = datetime.now()
         from models import storage  # Dynamic import to avoid cicular import
-        print(f"Saving {self.__class__.__name__} instance with ID: {self.id}")
         storage.save()  # Save the storage to file
 
     def to_dict(self):
