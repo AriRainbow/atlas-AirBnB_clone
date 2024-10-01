@@ -6,12 +6,18 @@ from datetime import datetime
 class BaseModel:
     """Base class for all models in AirBnB clone project."""
 
-    def __init__(self):
-        """Initializes a new BaseModel instance."""
-        self.id = str(uuid.uuid4())  # Assign a unique id
-        self.created_at = datetime.now()  # Set the creation time
-        self.updated_at = self.created_at  # Set the updated time to match creation initially
-
+    def __init__(self, *args, **kwargs):
+        """Initialization of the base model."""
+        if kwargs:
+            for key, value in kwargs.itmes():
+                if key == 'created_at' or key == 'updated_at':
+                    setattr(self, key, datetime.strptime(value, "%Y-%m-%d%T%H:%S.%f"))
+                elif key != '__class__':
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = self.updated_at = datetime.now()
+            
     def __str__(self):
         """Return string representation of the instance."""
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
