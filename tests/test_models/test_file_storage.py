@@ -65,5 +65,32 @@ class TestFileStorage(unittest.TestCase):
         self.storage.save()
         self.assertEqual(self.storage.count_objects(), initial_count + 1, "Count of objects is incorrect after saving.")
 
+    def test_reload(self):
+        """Test if reload correctly loads objects from file."""
+        obj1 = BaseModel()
+        obj2 = BaseModel()
+        
+        # Add objects to storage
+        self.storage.new(obj1)
+        self.storage.new(obj2)
+        self.storage.save()  # Save to file
+
+        # Clear objects from storage
+        self.storage.all().clear()  # This should be the equivalent of deleting all objects
+
+        # Now reload from file
+        self.storage.reload()
+
+        # Ensure that the objects are back in storage after reload
+        obj1_key = f"BaseModel.{obj1.id}"
+        obj2_key = f"BaseModel.{obj2.id}"
+
+        self.assertIn(obj1_key, self.storage.all(), "Object 1 not found after reload.")
+        self.assertIn(obj2_key, self.storage.all(), "Object 2 not found after reload.")
+
+        # Assert that the loaded object matches the original
+        self.assertEqual(self.storage.all()[obj1_key].to_dict(), obj1.to_dict(), "Loaded object 1 does not match original.")
+        self.assertEqual(self.storage.all()[obj2_key].to_dict(), obj2.to_dict(), "Loaded object 2 does not match original.")
+
 if __name__ == '__main__':
     unittest.main()
