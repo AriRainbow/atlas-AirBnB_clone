@@ -23,9 +23,10 @@ class BaseModel:
         """Return string representation of the instance."""
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
     
-    def save(self, storage):
+    def save(self):
         """Update the updated_at attributes to the current time."""
         self.updated_at = datetime.now()
+        from models import storage  # Dynamic import to avoid cicular import
         storage.save()  # Save the storage to file
 
     def to_dict(self):
