@@ -24,7 +24,7 @@ class FileStorage:
     def save(self):
         """Serializes __objects to the JSON file."""
         print("Saving the following objects to JSON:")
-        for key, obj in self.__obkects.itmes():
+        for key, obj in self.__objects.items():
             print(f"Object {key}: {obj}")
 
         with open(self.__file_path, 'w') as f:
