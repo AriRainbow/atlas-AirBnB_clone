@@ -11,6 +11,7 @@ class FileStorage:
     def __init__(self):
         self.__file_path = "file.json"  # path to the JSON file
         self.__objects = {}  # stores all objects
+        self.objects = {}
 
     def all(self):
         """Returns the dictionary __objects."""
@@ -64,7 +65,7 @@ class FileStorage:
                 # Ensure class name is retrieved correctly from the dictionary
                 if class_name in classes:
                     cls = classes.get(class_name)  # Retrieve the class object from the classes dictionary
-                    self.objects[key] = cls(**value)  # Instantiate the class using the saved dictionary
+                    self.__objects[key] = cls(**value)  # Instantiate the class using the saved dictionary
 
     def count_objects(self):
         """Returns the number of objects stored."""
