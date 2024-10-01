@@ -53,5 +53,13 @@ class TestFileStorage(unittest.TestCase):
         self.storage.new(obj1)
         self.assertEqual(self.storage.count_objects(), 1)  # Ensure one object is stored
 
+    def test_count_objects(self):
+        """Test if count_objects returns the correct number of stored objects."""
+        initial_count = self.storage.count_objects()
+        obj1 = BaseModel()
+        self.storage.new(obj1)
+        self.storage.save()
+        self.assertEqual(self.storage.count_objects(), initial_count + 1, "Count of objects is incorrect after saving.")
+
 if __name__ == '__main__':
     unittest.main()
