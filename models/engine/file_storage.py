@@ -34,6 +34,10 @@ class FileStorage:
                 for key, value in self.__objects.items():
                     # Create an instance of the class from the dictionary
                     class_name = value.pop("__class__")  # Remove __class__ key
+                    # Import classes here to avoid circular import
+                    from models.base_model import BaseModel
+                    from models.user import User
+                    
                     classes = {
                         "BaseModel": BaseModel,
                         "User": User
