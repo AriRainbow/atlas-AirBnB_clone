@@ -60,7 +60,7 @@ class FileStorage:
                     class_name = obj['__class__']
                     self.new(eval(class_name)(**obj))
 
-
+# Define new classes here
 class Place(BaseModel):
     '''Class'''
     pass
@@ -81,13 +81,11 @@ class Review(BaseModel):
     '''Class'''
     pass
 
-
 storage = FileStorage()
 storage.reload()
 
 class HBNBCommand(cmd.Cmd):
     '''Class'''
-
 
     prompt = '(hbnb) '
 
@@ -107,7 +105,7 @@ class HBNBCommand(cmd.Cmd):
         elif arg not in ["BaseModel", "Place", "State", "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
         else:
-            new_instance = BaseModel()
+            new_instance = eval(arg)()
             storage.new(new_instance)
             storage.save()
             print(new_instance.id)
@@ -154,7 +152,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if not args:
             print("** class name missing **")
-        elif args[0] ["BaseModel", "Place", "State", "City", "Amenity", "Review"]:
+        elif args[0] not in ["BaseModel", "Place", "State", "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
