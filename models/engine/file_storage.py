@@ -31,16 +31,15 @@ class FileStorage:
         return True  # Ensures that it returns True after saving
     
     def reload(self):
-    """Deserializes the JSON file to __objects."""
-    if os.path.exists(self.__file_path):
-        with open(self.__file_path, 'r') as f:
-            loaded_data = json.load(f)  # Load JSON data
-            for key, value in loaded_data.items():
-                class_name = value.pop("__class__", None)  # Remove __class__ key
+        """Deserializes the JSON file to __objects."""
+        if os.path.exists(self.__file_path):
+            with open(self.__file_path, 'r') as f:
+                loaded_data = json.load(f)  # Load JSON data
+                for key, value in loaded_data.items():
+                    class_name = value.pop("__class__", None)  # Remove __class__ key
 
                 # Ensure the class name exists in the saved data
                 if not class_name:
-                    print(f"Missing class name for key: {key}")
                     continue
 
                 # Import classes here to avoid circular import
