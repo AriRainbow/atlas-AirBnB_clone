@@ -23,6 +23,10 @@ class FileStorage:
 
     def save(self):
         """Serializes __objects to the JSON file."""
+        print("Saving the following objects to JSON:")
+        for key, obj in self.__obkects.itmes():
+            print(f"Object {key}: {obj}")
+
         with open(self.__file_path, 'w') as f:
             json.dump({key: obj.to_dict() for key, obj in self.__objects.items()}, f)
 
@@ -31,9 +35,10 @@ class FileStorage:
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as f:
                 loaded_data = json.load(f)  # Load JSON data
+                print("Loaded data from JSON:")
+                print(loaded_data)
                 for key, value in loaded_data.items():
-                    # Extract class name
-                    class_name = value.pop("__class__")  # Remove __class__ key
+                    class_name = value.pop("__class__", None)  # Remove __class__ key
 
                     # Ensure the class name exists in the saved data
                     if not class_name:
@@ -53,6 +58,7 @@ class FileStorage:
 
                     # Check if class_name exists in classes
                     if class_name in classes:
+                        print(f"Restoring objects {key} of class {class_name}")
                         # Dynamically create an instance from the class using the dictionary value
                         self.__objects[key] = classes[class_name](**value)
                     else:
