@@ -57,7 +57,30 @@ class FileStorage:
             with open(self.__file_path, 'r') as f:
                 obj_dict = json.load(f)
                 for obj in obj_dict.values():
-                    self.new(BaseModel(**obj))
+                    class_name = obj['__class__']
+                    self.new(eval(class_name)(**obj))
+
+
+class Place(BaseModel):
+    '''Class'''
+    pass
+
+class State(BaseModel):
+    '''Class'''
+    pass
+
+class City(BaseModel):
+    '''Class'''
+    pass
+
+class Amenity(BaseModel):
+    '''Class'''
+    pass
+
+class Review(BaseModel):
+    '''Class'''
+    pass
+
 
 storage = FileStorage()
 storage.reload()
@@ -81,7 +104,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg):
         if not arg:
             print("** class name missing **")
-        elif arg != "BaseModel":
+        elif arg not in ["BaseModel", "Place", "State", "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
         else:
             new_instance = BaseModel()
@@ -93,7 +116,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if not args:
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        elif args[0] not in ["BaseModel", "Place", "State", "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
@@ -108,7 +131,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if not args:
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        elif args[0] not in ["BaseModel", "Place", "State", "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
@@ -121,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def do_all(self, arg):
-        if arg and arg != "BaseModel":
+        if arg and arg not in ["BaseModel", "Place", "State", "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
         else:
             obj_list = [str(obj) for obj in storage.all().values() if not arg or obj.__class__.__name__ == arg]
@@ -131,7 +154,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if not args:
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        elif args[0] ["BaseModel", "Place", "State", "City", "Amenity", "Review"]:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
