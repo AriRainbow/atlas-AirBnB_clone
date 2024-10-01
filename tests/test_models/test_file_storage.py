@@ -33,6 +33,7 @@ class TestFileStorage(unittest.TestCase):
 
         # Check if file exists
         self.assertTrue(os.path.exists(self.storage._FileStorage__file_path), "File not found after save.")
+        
         self.storage.reload()  # Reload to ensure the saved data is loaded
         obj_key = f"BaseModel.{obj1.id}"  # Construct the key for the stored object
 
@@ -42,6 +43,9 @@ class TestFileStorage(unittest.TestCase):
         # Assert that the saved object matches the original
         saved_obj = self.storage.all()[obj_key]
         self.assertEqual(saved_obj.to_dict(), obj1.to_dict(), "Saved object does not match original.")
+
+        # Check the count of objects after saving
+        self.assertEqual(self.storage.count_objects(), 1, "Object count after saving is incorrect.")
 
     def test_file_path(self):
         """Test that the file_path is correctly initialized."""
