@@ -12,10 +12,10 @@ class FileStorage:
         self.__file_path = "file.json"  # path to the JSON file
         self.__objects = {}  # stores all objects
 
-    @property
-    def objects(self):
-        """Expose __objects as a property."""
-        return self.__objects
+    # @property
+    # def objects(self):
+        # """Expose __objects as a property."""
+        # return self.__objects
 
     def all(self):
         """Returns the dictionary __objects."""
