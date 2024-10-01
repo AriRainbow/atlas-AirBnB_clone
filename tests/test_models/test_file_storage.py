@@ -31,7 +31,8 @@ class TestFileStorage(unittest.TestCase):
         self.storage.new(obj1)  # Add the object to storage
         self.storage.save()  # Save to file
 
-        # Reload storage to check if the object is saved correctly
+        # Check if file exists
+        self.assertTrue(os.path.exists(self.storage._FileStorage__file_path), "File not found after save.")
         self.storage.reload()  # Reload to ensure the saved data is loaded
         obj_key = f"BaseModel.{obj1.id}"  # Construct the key for the stored object
 
