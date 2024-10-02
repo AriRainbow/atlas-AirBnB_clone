@@ -61,5 +61,30 @@ To start the command interpreter in interactive mode:
 
 ## Flowchart
 
+graph TD
+    A[AirBnB Clone Command Interpreter] --> B[Start the Interpreter]
+    B --> C[User Enters Command (CRUD actions)]
+    C --> D[Parse the Command Input]
+    D --> E{Command Matches Action?}
+    E -- No --> F[Invalid Command (Error Message)]
+    E -- Yes --> G[Determine Object Type (Class)]
+    G --> H[BaseModel]
+    G --> I[User]
+    G --> J[Place]
+    G --> K[City]
+    G --> L[State]
+    G --> M[Amenity]
+    G --> N[Review]
+    H --> O[Perform the Action on the Object]
+    I --> O
+    J --> O
+    K --> O
+    L --> O
+    M --> O
+    N --> O
+    O --> P[Save the Object to FileStorage (JSON format)]
+    P --> Q[Show Confirmation or Result to the User (if applicable)]
+    Q --> R[End Session or Await Next Cmd]
+
 [Back to Top](#table-of-contents)
 
