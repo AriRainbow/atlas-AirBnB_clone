@@ -60,6 +60,70 @@ To start the command interpreter in interactive mode:
 ---
 
 ## Flowchart
++---------------------------------------------------+
+|             AirBnB Clone Command Interpreter      |
++---------------------------------------------------+
+                    |
+                    V
+       +---------------------------+
+       |    Start the Interpreter   |
+       +---------------------------+
+                    |
+                    V
+       +--------------------------------------+
+       |  User Enters Command (CRUD actions): |
+       |  - Create                           |
+       |  - Retrieve                         |
+       |  - Update                           |
+       |  - Delete                           |
+       +--------------------------------------+
+                    |
+                    V
+       +---------------------------+
+       | Parse the Command Input    |
+       +---------------------------+
+                    |
+       +---------------------------+
+       |   Command Matches Action?  |  -- No --> Invalid Command (Error Message)
+       +---------------------------+
+                    |
+                    Yes
+                    |
+                    V
+       +-----------------------------------------------------+
+       |   Determine Object Type (Class):                    |
+       |   - BaseModel                                       |
+       |   - User                                            |
+       |   - Place                                           |
+       |   - City                                            |
+       |   - State                                           |
+       |   - Amenity                                         |
+       |   - Review                                          |
+       +-----------------------------------------------------+
+                    |
+                    V
+       +--------------------------------------------------+
+       |   Perform the Action on the Object:               |
+       |   - Create: Instantiate and store object          |
+       |   - Retrieve: Show object attributes              |
+       |   - Update: Modify object attributes              |
+       |   - Delete: Remove object from storage            |
+       +--------------------------------------------------+
+                    |
+                    V
+       +----------------------------------------------+
+       | Save the Object to FileStorage (JSON format) |
+       +----------------------------------------------+
+                    |
+                    V
+       +----------------------------------------------------------+
+       |   Show Confirmation or Result to the User (if applicable) |
+       +----------------------------------------------------------+
+                    |
+                    V
+       +-----------------------------------+
+       |    End Session or Await Next Cmd  |
+       +-----------------------------------+
 
 [Back to Top](#table-of-contents)
 
