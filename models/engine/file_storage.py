@@ -31,7 +31,7 @@ class FileStorage:
         try:
             with open(self.__file_path, 'w') as f:
                 # Create a dictionary representation of all objects
-                data = {key: obj.to_dict() for key, 
+                data = {key: obj.to_dict() for key,
                         obj in self.__objects.items()}
                 # Serialize the data to JSON and write it to the file
                 json.dump(data, f)
@@ -47,7 +47,7 @@ class FileStorage:
             with open(self.__file_path, 'r') as f:
                 loaded_data = json.load(f)  # Load JSON data
                 for key, value in loaded_data.items():
-                    class_name = value.pop("__class__", None)  
+                    class_name = value.pop("__class__", None) 
                     # Remove __class__ key
 
                     if not class_name:
@@ -75,9 +75,9 @@ class FileStorage:
 
                 # Ensure class name is retrieved correctly from the dictionary
                 if class_name in classes:
-                    cls = classes.get(class_name)  
+                    cls = classes.get(class_name)
                     # Retrieve the class object from the classes dictionary
-                    self.objects[key] = cls(**value)  
+                    self.objects[key] = cls(**value)
                     # Instantiate the class using the saved dictionary
 
     def get_objects(self):
