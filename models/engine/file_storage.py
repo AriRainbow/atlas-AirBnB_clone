@@ -47,7 +47,7 @@ class FileStorage:
             with open(self.__file_path, 'r') as f:
                 loaded_data = json.load(f)  # Load JSON data
                 for key, value in loaded_data.items():
-                    class_name = value.pop("__class__", None) 
+                    class_name = value.pop("__class__", None)
                     # Remove __class__ key
 
                     if not class_name:
