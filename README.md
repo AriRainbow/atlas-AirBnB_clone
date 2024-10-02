@@ -60,5 +60,6 @@ To start the command interpreter in interactive mode:
 ---
 
 ## Flowchart
+![Flowchart](mermaid-flow.svg)
 
 [Back to Top](#table-of-contents)
