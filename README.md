@@ -18,3 +18,12 @@ via a shell interface, performing operations such as:
 
 ### How to Start the Command Interpreter
 To start the command interpreter in interactive mode:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/AriRainbow/atlas-AirBnB_clone.git
+   cd atlas-AirBnB_clone
+   ```
+2. Run the interpreter:
+   ```bash
+   python3 console.py
+   ```
