@@ -9,6 +9,7 @@ import os
 import uuid
 from datetime import datetime
 
+
 class BaseModel:
     '''Class'''
 
@@ -36,6 +37,7 @@ class BaseModel:
     def __str__(self):
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
+
 class FileStorage:
     '''Class'''
 
@@ -60,29 +62,36 @@ class FileStorage:
                     class_name = obj['__class__']
                     self.new(eval(class_name)(**obj))
 
+
 # Define new classes here
 class Place(BaseModel):
     '''Class'''
     pass
 
+
 class State(BaseModel):
     '''Class'''
     pass
+
 
 class City(BaseModel):
     '''Class'''
     pass
 
+
 class Amenity(BaseModel):
     '''Class'''
     pass
+
 
 class Review(BaseModel):
     '''Class'''
     pass
 
+
 storage = FileStorage()
 storage.reload()
+
 
 class HBNBCommand(cmd.Cmd):
     '''Class'''
