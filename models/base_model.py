@@ -23,7 +23,7 @@ class BaseModel:
         """Return string representation of the instance."""
         return "[{}] ({}) {}".format(self.__class__.__name__,
                                      self.id, self.__dict__)
-    
+
     def save(self):
         """Update the updated_at attributes to the current time."""
         self.updated_at = datetime.now()
@@ -33,7 +33,8 @@ class BaseModel:
     def to_dict(self):
         """Return a dictionary representation of the instance."""
         dict_rep = self.__dict__.copy()  # Copy current attributes
-        dict_rep['__class__'] = self.__class__.__name__  # Add class name to the dictionary
+        dict_rep['__class__'] = self.__class__.__name__
+        # Add class name to the dictionary
         dict_rep['created_at'] = self.created_at.isoformat()
         # Convert created_at to ISO string
         dict_rep['updated_at'] = self.updated_at.isoformat()
