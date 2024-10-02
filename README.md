@@ -1,7 +1,5 @@
 # AirBnB Clone - Command Interpreter
 
-## Index
-
 ## Project Description
 This project is the first step in creating a clone of the AirBnB web
 application. It includes a command interpreter to manage the objects of the
