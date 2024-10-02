@@ -111,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg):
         if not arg:
             print("** class name missing **")
-        elif arg not in ["BaseModel", "Place", "State", "City", 
+        elif arg not in ["BaseModel", "Place", "State", "City",
                          "Amenity", "Review"]:
             print("** class doesn't exist **")
         else:
@@ -137,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if not args:
             print("** class name missing **")
-        elif args[0] not in ["BaseModel", "Place", "State", "City", 
+        elif args[0] not in ["BaseModel", "Place", "State", "City",
                              "Amenity", "Review"]:
             print("** class doesn't exist **")
         elif len(args) < 2:
@@ -151,7 +151,7 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def do_all(self, arg):
-        if arg and arg not in ["BaseModel", "Place", "State", "City", 
+        if arg and arg not in ["BaseModel", "Place", "State", "City",
                                "Amenity", "Review"]:
             print("** class doesn't exist **")
         else:
@@ -162,7 +162,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if not args:
             print("** class name missing **")
-        elif args[0] not in ["BaseModel", "Place", "State", "City", 
+        elif args[0] not in ["BaseModel", "Place", "State", "City",
                              "Amenity", "Review"]:
             print("** class doesn't exist **")
         elif len(args) < 2:
