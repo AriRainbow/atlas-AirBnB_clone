@@ -1,0 +1,49 @@
+.filters {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .locations, .amenities {
+    height: 100%;
+    width: 25%;
+    position: relative;
+  }
+  
+  .locations {
+    border-right: 1px solid #DDDDDD;
+  }
+  
+  h3 {
+    font-weight: 600;
+  }
+  
+  h4 {
+    font-weight: 400;
+    font-size: 14px;
+  }
+  
+  /* Popover styling */
+  .popover {
+    display: none;
+    position: absolute;
+    background-color: #FAFAFA;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    width: 100%;
+    padding: 10px;
+    list-style: none;
+  }
+  
+  .popover li {
+    padding: 5px 0;
+  }
+  
+  .popover h2 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  /* Display popover on hover */
+  .locations:hover .popover, .amenities:hover .popover {
+    display: block;
+  }
